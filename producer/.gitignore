@@ -1,0 +1,17 @@
+target
+**.iml
+.idea
+**logs
+**/log
+**tmp
+**/out/test
+**atlassian-ide-plugin.xml
+**swp
+.DS_Store
+**.bak
+**screenshot
+**do-not-commit-me-please**
+**dncmp**
+test_result.html
+**dncmp**
+.project
