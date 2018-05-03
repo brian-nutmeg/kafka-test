@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class ProducerExample {
 
-    private final static String TOPIC_NAME = "page_visits";
+    private final static String TOPIC_NAME = "gc";
     private final static String SCHEMA_REGISTRATION_URL = "http://localhost:8081";
     private final static String BOOTSTRAP_SERVERS = "http://localhost:9092";
     private final Clock clock;
@@ -42,8 +42,9 @@ public class ProducerExample {
                 "\"name\": \"page_visit\"," +
                 "\"fields\": [" +
                 "{\"name\": \"time\", \"type\": \"long\"}," +
-                "{\"name\": \"site\", \"type\": \"string\"}," +
-                "{\"name\": \"ip\", \"type\": \"string\"}" +
+                "{\"name\": \"action\", \"type\": \"string\"}," +
+                "{\"name\": \"email\", \"type\": \"string\"}," +
+                "{\"name\": \"data\", \"type\": \"string\"}" +
                 "]}";
 
         Schema.Parser parser = new Schema.Parser();
@@ -56,19 +57,24 @@ public class ProducerExample {
         Producer<String, GenericRecord> producer = createProducer();
         Schema schema = createSchema();
 
+        String site = "add/remove";
+//        String ip = "1.1.1." + rnd.nextInt(255);
+
+
         Random rnd = new Random();
         for (long nEvents = 0; nEvents < numEvents; nEvents++) {
 //            long runtime = new Date().getTime();
-            String site = "www.whatever.com";
-            String ip = "1.1.1." + rnd.nextInt(255);
+
+            String user = users[rnd.nextInt(5)];
 
             GenericRecord page_visit = new GenericData.Record(schema);
             page_visit.put("time", clock.millis());
-            page_visit.put("site", site);
-            page_visit.put("ip", ip);
+            page_visit.put("action", site);
+            page_visit.put("email", user+"@nutmeg.com");
+            page_visit.put("data", "data: " + rnd.nextInt(500));
 
             ProducerRecord<String, GenericRecord> data = new ProducerRecord<>(
-                    TOPIC_NAME, users[rnd.nextInt(5)], page_visit);
+                    TOPIC_NAME, user, page_visit);
             producer.send(data);
         }
 

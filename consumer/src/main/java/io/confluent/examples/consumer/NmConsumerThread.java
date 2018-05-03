@@ -47,9 +47,11 @@ public class NmConsumerThread implements Runnable {
                 }
                 for (ConsumerRecord<String, GenericRecord> record : records) {
 
-                    System.out.println("ThreadId: " + threadId + " Received message:- Key: " + record.key() +
+                    System.out.println("ThreadId: " + threadId +
+                            ", Partition: " + record.partition() +
+                            " Received message:- Key: " + record.key() +
                             " Value: " + record.value() +
-                            ", Partition: " + record.partition() + ", Offset: " + record.offset() +
+                            ", Offset: " + record.offset() +
                             ", by ThreadID: " + Thread.currentThread().getId());
                 }
                 kafkaConsumer.commitAsync();

@@ -7,7 +7,7 @@ public class NmConsumerExample {
 
         String brokers = "http://localhost:9092";
         String groupId = "group01";
-        String topic = "page_visits";
+        String topic = "gc";
         int numberOfConsumer = 3;
         String zookeeperUrl = "localhost:2181";
 
