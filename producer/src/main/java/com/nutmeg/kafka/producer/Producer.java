@@ -31,7 +31,6 @@ public class Producer {
         for (long nEvents = 0; nEvents < numEvents; nEvents++) {
 
             String user = users[rnd.nextInt(5)];
-
             GenericRecord page_visit = new GenericData.Record(schema);
             page_visit.put("time", clock.millis());
             page_visit.put("action", "add/remove/whatever");
