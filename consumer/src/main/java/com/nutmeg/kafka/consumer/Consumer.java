@@ -10,15 +10,15 @@ public class Consumer {
         String brokers = "http://localhost:9092";
         String schemaRegUrl = "http://localhost:8081";
         String groupId = "group01";
-        String topic = "gc";
-        int numberOfConsumer = 3;
+        String topic = "mytopic123";
+        int numberOfConsumer = 6;
         String zookeeperUrl = "localhost:2181";
 
         new ConsumerGroup(brokers, groupId, topic, numberOfConsumer, schemaRegUrl, zookeeperUrl)
                 .execute();
 
         try {
-            Thread.sleep(100000);
+            Thread.sleep(10000);
         } catch (InterruptedException ie) {
 
         }
